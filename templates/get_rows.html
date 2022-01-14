@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+   Table context_data["tb_name"]
+{% endblock %}
+
+{% block content %}
+{% set db_name = context_data["db"] %}
+
+<div class="panel-body">
+   <button class="btn btn-outline btn-success btn-block"
+            onclick="window.location.href='{{ url_for('app_row.insert_row',
+             db_name=context_data["db"], tb_name=context_data["tb_name"]) }} ';">
+       Create row</button>
+</div>
+    <table class="table table-hover table-dark">
+         <thead>
+            <tr>
+                {% for item in context_data["columns"] %}
+                     <th scope="col">{{ item["name"] }}</th>
+                {% endfor %}
+            </tr>
+         </thead>
+         <tbody>
+            {% for item in context_data["records"] %}
+                <tr>
+                  {% for key in context_data["columns"] %}
+                       <td>{{ item[key["name"]] }}</td>
+                  {% endfor %}
+                   <td>
+                       <button class="btn btn-outline btn-info"
+                              onclick="window.location.href='{{ url_for('app_row.update_row',
+                                        db_name=context_data["db"], tb_name=context_data["tb_name"], row_id=item["id"]) }} ';" >
+                           Update</button>
+
+                       <button class="btn btn-outline btn-danger"
+                               onclick="window.location.href='{{ url_for('app_row.delete_row',
+                                        db_name=context_data["db"], tb_name=context_data["tb_name"], id=item["id"]) }} ';">
+                           Delete</button>
+                   </td>
+                </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+{% endblock%}

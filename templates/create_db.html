@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+   Create Database file
+{% endblock %}
+
+{% block content %}
+{% include 'modal_error.html' %}
+
+<!--<a data-toggle="modal" data-target="#errorModal">Click Here</a>-->
+<!--{% if context_error %}-->
+<!--<script>-->
+<!--$('#errorModal').modal('show');-->
+<!--</script>-->
+<!--{% endif %}-->
+
+
+   <div class="container">
+      <br/>
+      <h1>Create database file</h1>
+      <br/>
+      <form method="POST" class="form" style="color:white">
+         {{ form.db_name.label() }}
+         {{ form.db_name(class="form-control", placeholder="file name")}}
+
+         <br/>
+         {{ form.submit(class="btn btn-lg btn-block btn-primary")}}
+      </form>
+   </div>
+{% endblock %}

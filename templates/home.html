@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Home Page
+{% endblock %}
+
+{%block content%}
+    <style>
+       .text {
+        text-align:  center;
+        vertical-align: middle;
+       }
+
+    </style>
+
+    <div class="text">
+        <p><h1>Welcome!</h1></p>
+        <button class="btn btn-outline btn-info" onclick="window.location.href='{{ url_for('app_db.get_db_files') }}';">View database files</button>
+    </div>
+{%endblock%}

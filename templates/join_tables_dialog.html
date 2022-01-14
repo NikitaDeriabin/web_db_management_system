@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+   Join tables dialog
+{% endblock %}
+
+{% block content %}
+   <div class="container">
+      <br/>
+      <h1>Join tables dialog </h1>
+      <br/>
+      <form  method="POST" class="form" style="color:white">
+        <div class="input-wrapper">
+           <div>Table1: <br/>
+               <select class="form-control" name="table1">
+                    {% for table in context_tables%}
+                        <option>{{table}}</option>
+                    {% endfor %}
+                </select>
+               <br>
+           </div>
+           <div>Table2: <br/>
+               <select class="form-control" name="table2">
+                    {% for table in context_tables%}
+                        <option>{{table}}</option>
+                    {% endfor %}
+                </select>
+               <br>
+           </div>
+           <div>Common column: <br/>
+               <input class="form-control" type="text" name="common_attr" placeholder="Column name"/>
+               <br>
+           </div>
+        </div>
+          <button class="btn btn-lg btn-block btn-primary" type="submit">Submit</button>
+         <br/>
+      </form>
+   </div>
+
+{% endblock %}

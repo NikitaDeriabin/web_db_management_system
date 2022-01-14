@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+   Database files
+{% endblock %}
+
+{% block content %}
+<div class="panel-body">
+   <button class="btn btn-outline btn-success btn-block" onclick="window.location.href='{{ url_for('app_db.create_db_form') }}';">Create Database</button>
+</div>
+    <table class="table table-hover table-dark">
+         <thead>
+            <tr>
+               <th scope="col">Name</th>
+               <th scope="col">Options</th>
+            </tr>
+         </thead>
+         <tbody>
+            <!-- Your rows inside the table HERE: -->
+            {% for item in context_db["db"] %}
+            <tr>
+               <td>{{ item }}</td>
+               <td>
+                   <button class="btn btn-outline btn-info"
+                           onclick="window.location.href='{{ url_for('app_table.get_tables', db_name=item) }} ';">
+                       View tables</button>
+
+                   <button class="btn btn-outline btn-danger"
+                           onclick="window.location.href='{{ url_for('app_db.delete_db', name=item) }} ';">
+                       Delete</button>
+               </td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+{% endblock%}

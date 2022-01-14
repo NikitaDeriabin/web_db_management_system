@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+   Tables in context_tables["db"]
+{% endblock %}
+
+{% block navbar %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('app_row.join_tables', db_name=context_tables["db"]) }}">Join tables<span class="sr-only">(current)</span></a>
+    </li>
+{% endblock %}
+
+{% block content %}
+{% set db_name = context_tables["db"] %}
+
+<div class="panel-body">
+   <button class="btn btn-outline btn-success btn-block"
+            onclick="window.location.href='{{ url_for('app_table.create_table', db_name=db_name) }} ';">
+       Create table</button>
+</div>
+    <table class="table table-hover table-dark">
+         <thead>
+            <tr>
+               <th scope="col">Name</th>
+               <th scope="col">Options</th>
+            </tr>
+         </thead>
+         <tbody>
+            <!-- Your rows inside the table HERE: -->
+            {% for item in context_tables["tables"] %}
+            <tr>
+               <td>{{ item }}</td>
+               <td>
+                   <button class="btn btn-outline btn-info"
+                           onclick="window.location.href='{{ url_for('app_row.get_rows', db_name=db_name, tb_name=item) }} ';">
+                       View rows</button>
+
+                   <button class="btn btn-outline btn-danger"
+                           onclick="window.location.href='{{ url_for('app_table.delete_table', db_name=db_name, name=item) }} ';">
+                       Delete</button>
+               </td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+{% endblock%}
